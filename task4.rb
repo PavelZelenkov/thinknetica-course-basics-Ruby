@@ -9,16 +9,16 @@ b = gets.to_i
 puts "Введите коэффициент С:"
 c = gets.to_i
 
-d = b**2 - 4*a*c
+d = b**2 - 4 * a * c
 
 puts d
 
 if d < 0
-    puts "Корней нет"
+  puts "Корней нет"
 elsif d == 0
-    puts "Один корень"
+  puts "Один корень"
 else
-    puts "Дискриминант #{d}"
-    puts "Х1 = #{ ( -b + Math.sqrt(d) ) / ( 2 * a)}"
-    puts "Х2 = #{ ( -b - Math.sqrt(d) ) / ( 2 * a)}"
+  puts "Дискриминант #{d}"
+  puts "Х1 = #{(-b + Math.sqrt(d)) / (2 * a)}"
+  puts "Х2 = #{(-b - Math.sqrt(d)) / (2 * a)}"
 end
