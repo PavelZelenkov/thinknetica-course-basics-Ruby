@@ -15,9 +15,9 @@ loop do
   price_hh = {}
 
   puts "Введите название товара (Введите \"стоп\" что бы выйти): "
-  product = gets.strip.to_sym
+  product = gets.strip
 
-  if :стоп == product
+  if 'стоп' == product
     puts "Конец ввода."
     puts # для более читабельного вывода в терминале
     break
