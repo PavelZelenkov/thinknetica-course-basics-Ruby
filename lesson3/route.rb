@@ -14,7 +14,7 @@ class Route # Маршрут
   end
 
   def all_stations # выводит список всех станций по порядку от начальной до конечной
-    @route.each { |i| puts "#{i}"}
+    @route.each { |i| puts "#{i}" }
     @route.size
   end
 end
