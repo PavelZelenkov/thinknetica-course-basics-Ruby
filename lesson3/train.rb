@@ -37,39 +37,35 @@ class Train # Поезд
     puts "Начало маршрута со станции: #{route.route[@index_station]}"
   end
   
-  def forward_st # перемещаем поезд вперед на одну станцию
+  def to_forward_station # перемещаем поезд вперед на одну станцию
     if @routes[@index_station + 1] == nil
-      puts "Конечная, дальше поезд не идёт!"
     else
       @routes[@index_station += 1]
     end
   end
 
-  def back_st # перемещаем поезд на одну станцию назад
+  def to_back_station # перемещаем поезд на одну станцию назад
     if @routes[@index_station - 1] == @routes[-1]
-      "Cтанций нет!"
     else
       @routes[@index_station -= 1]
     end
   end
 
-  def return_previous_st # возвращает предыдущую станцию
+  def prev_station # возвращает предыдущую станцию
     if @routes[@index_station - 1] == @routes[-1]
-      puts "Предыдущих станций нет!"
     else
-      puts "Предыдущая станция: #{@routes[@index_station - 1]}"
+      @routes[@index_station - 1]
     end
   end
 
-  def return_current_st # возвращаем текущую станцию
-    puts "Текущая станция: #{@routes[@index_station]}"
+  def current_station # возвращаем текущую станцию
+    @routes[@index_station]
   end
 
-  def return_next_st # возвращаем следующую станцию
+  def next_station # возвращаем следующую станцию
     if @routes[@index_station + 1] == nil
-      puts "Конечная, дальше поезд не идёт!"
     else
-      puts "Следующая станция: #{@routes[@index_station + 1]}"
+      @routes[@index_station + 1]
     end
   end
 end
