@@ -1,8 +1,8 @@
 class Route # Маршрут
   attr_reader :route
 
-  def initialize(starting_st, end_st) # начальная и конечная станция
-    @route = [starting_st, end_st]
+  def initialize(begin_station, end_station) # начальная и конечная станция
+    @route = [begin_station, end_station]
   end
 
   def add_station(station) # добавление промежуточных станций

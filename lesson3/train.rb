@@ -33,37 +33,43 @@ class Train # Поезд
   def new_routes(route) # добавляем маршрут из класса Route и помещаем поезд на первую станцию маршрута
     puts "Список станций:"
     @routes = route.route.each { |i| puts i }
-    self.routes[@r = 0]
-    puts "Начало маршрута со станции: #{route.route[@r]}"
+    self.routes[@index_station = 0]
+    puts "Начало маршрута со станции: #{route.route[@index_station]}"
   end
   
   def forward_st # перемещаем поезд вперед на одну станцию
-    if @routes[@r + 1] == nil
+    if @routes[@index_station + 1] == nil
       puts "Конечная, дальше поезд не идёт!"
     else
-      @routes[@r += 1]
+      @routes[@index_station += 1]
     end
   end
 
   def back_st # перемещаем поезд на одну станцию назад
-    if @routes[@r - 1] == @routes[-1]
+    if @routes[@index_station - 1] == @routes[-1]
       "Cтанций нет!"
     else
-      @routes[@r -= 1]
+      @routes[@index_station -= 1]
     end
   end
 
-  def return_st # возвращаем список станций - предыдущая, текущая, конечная.
-    if @routes[@r - 1] == @routes[-1]
+  def return_previous_st # возвращает предыдущую станцию
+    if @routes[@index_station - 1] == @routes[-1]
       puts "Предыдущих станций нет!"
     else
-      puts "Предыдущая станция: #{@routes[@r - 1]}"
+      puts "Предыдущая станция: #{@routes[@index_station - 1]}"
     end
-      puts "Текущая станция: #{@routes[@r]}"
-    if @routes[@r + 1] == nil
+  end
+
+  def return_current_st # возвращаем текущую станцию
+    puts "Текущая станция: #{@routes[@index_station]}"
+  end
+
+  def return_next_st # возвращаем следующую станцию
+    if @routes[@index_station + 1] == nil
       puts "Конечная, дальше поезд не идёт!"
     else
-      puts "Следующая станция: #{@routes[@r + 1]}"
+      puts "Следующая станция: #{@routes[@index_station + 1]}"
     end
   end
 end

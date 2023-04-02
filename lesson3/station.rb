@@ -21,6 +21,5 @@ class Station # Станция
   def train_type(type) # возвращает список всех поездов на станции по типу
     t = trains.select { |tr| tr.type == "#{type}" }
     t.each { |i| puts i.type }
-    puts t.size
   end
 end
