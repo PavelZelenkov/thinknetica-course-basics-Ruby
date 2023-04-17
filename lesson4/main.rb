@@ -188,13 +188,6 @@ class Main
     puts
   end
 
-  def active_route_enumeration # маршрут активный для изменения
-    a = active_route.route
-    a.each do |index|
-      print "#{index.name} "
-    end
-  end
-
   def route_enumeration # общий список маршрутов для выбора
     @routes.each_index do |index|
       print "№ #{index + 1}. "
@@ -332,6 +325,13 @@ class Main
     info_menu
   end
 
+  protected 
+
+=begin 
+вывел в protected методы перечислений, это единственные методы в классе, которые не в принудительном порядке,
+а выводятся исключительно при необходимости перечисления или дальнейшего выбора.
+=end
+
   def station_listing # перечисление станций
     @stations.each_index do |index|
       print "№ #{index + 1}. "
@@ -355,6 +355,13 @@ class Main
       st = @trains[index]
       print "#{st.number}. тип поезда: #{st.type}"
       puts
+    end
+  end
+
+  def active_route_enumeration # маршрут активный для изменения
+    a = active_route.route
+    a.each do |index|
+      print "#{index.name} "
     end
   end
 
