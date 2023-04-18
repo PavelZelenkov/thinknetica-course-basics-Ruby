@@ -1,7 +1,6 @@
 class PassengerWagon < Wagon
-
-  def initialize(type = "pass")
-    @type = type
+  def initialize
+    @type = 'pass'
   end
-
+  
 end

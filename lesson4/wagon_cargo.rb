@@ -1,7 +1,6 @@
 class CargoWagons < Wagon
-
-  def initialize(type = "cargo")
-    @type = type
+  def initialize
+    @type = 'cargo'
   end
-
+  
 end

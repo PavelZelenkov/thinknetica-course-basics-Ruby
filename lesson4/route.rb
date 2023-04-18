@@ -1,20 +1,20 @@
 class Route # Маршрут
-  attr_reader :route
+  attr_reader :stations
 
   def initialize(begin_station, end_station) # начальная и конечная станция
-    @route = [begin_station, end_station]
+    @stations = [begin_station, end_station]
   end
 
   def add_station(station) # добавление промежуточных станций   
-    @route.insert(-2, station)
+    stations.insert(-2, station)
   end
 
   def del_station(station) # удаление промежуточных станций
-    @route.delete(station)
+    stations.delete(station)
   end
 
   def all_stations # выводит список всех станций по порядку от начальной до конечной
-    @route.each { |i| puts "#{i}" }
-    @route.size
+    stations.each { |i| puts "#{i}" }
+    stations.size
   end
 end

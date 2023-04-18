@@ -33,10 +33,18 @@ class Main
     puts "Введите 3, если вы хотите вывести текущие данные о объектах"
     puts "Введите 0, если вы хотите закончить программу"
     menu = gets.strip
-    create_menu if menu == "1"
-    action_menu if menu == "2"
-    info_menu if menu == "3"
-    exit if menu == "0"
+    
+    case menu
+    when "1"
+      create_menu
+    when "2"
+      action_menu
+    when "3"
+      info_menu
+    when "4"
+      exit
+    end
+    
   end
 
   def create_menu
@@ -46,11 +54,20 @@ class Main
     puts "Введите 4, если хотите создать маршрут"
     puts "Введите 0, если хотите вернуться в главное меню"
     menu = gets.strip
-    create_station if menu == "1"
-    create_train if menu == "2"
-    create_wagon if menu == "3"
-    create_route if menu == "4"
-    show_menu if menu == "0"
+
+    case menu
+    when "1"
+      create_station
+    when "2"
+      create_train
+    when "3"
+      create_wagon
+    when "4"
+      create_route
+    when "0"
+      show_menu
+    end
+
   end
 
   def create_station # создание станции
@@ -68,9 +85,16 @@ class Main
     puts "Введите 2, если хотите создать грузовой поезд"
     puts "Введите 0, если хотите вернуться в меню назад"
     menu = gets.strip
-    passenger_train if menu == "1"
-    cargo_train if menu == "2"
-    create_menu if menu == "0"
+
+    case menu
+    when "1"
+      passenger_train
+    when "2"
+      cargo_train
+    when "0"
+      create_menu
+    end
+
   end
 
   def passenger_train # создание пассажирского поезда
@@ -97,9 +121,16 @@ class Main
     puts "Введите 2, если хотите создать грузовой вагон"
     puts "Введите 0, если хотите вернуться в меню назад"
     menu = gets.strip
-    passenger_wagon if menu == "1"
-    cargo_wagon if menu == "2"
-    create_menu if menu == "0"
+
+    case menu
+    when "1"
+      passenger_wagon
+    when "2"
+      cargo_wagon
+    when "0"
+      create_menu
+    end
+
   end
 
   def passenger_wagon # создание пассажирского вагона
@@ -140,11 +171,20 @@ class Main
     puts "Введите 4, если вы хотите добавить или отцепить вагон от поезда"
     puts "Введите 0, если хотите вернуться в главное меню"
     menu = gets.strip
-    add_and_dell_stations if menu == "1"
-    assign_train_route if menu == "2"
-    to_forward_and_back_station if menu == "3"
-    action_with_the_wagon if menu == "4"
-    show_menu if menu == "0"
+
+    case menu
+    when "1"
+      add_and_dell_stations
+    when "2"
+      assign_train_route
+    when "3"
+      to_forward_and_back_station
+    when "4"
+      action_with_the_wagon
+    when "0"
+      show_menu
+    end
+
   end
 
   def add_and_dell_stations # добавление и удаление промежуточных станций
@@ -160,9 +200,16 @@ class Main
       puts "Введите 2, если хотите удалить станцию в маршруте"
       puts "Введите 0, назад в меню"
       menu = gets.strip
-      adding_station_route if menu == "1"
-      deleting_station_route if menu == "2"
-      action_menu if menu == "0"
+
+      case menu
+      when "1"
+        adding_station_route
+      when "2"
+        deleting_station_route
+      when "0"
+        action_menu
+      end
+
     end
   end
 
@@ -181,7 +228,7 @@ class Main
     puts "Выберите станцию, которую хотите удалить:"
     active_route_enumeration
     station = gets.strip.to_i
-    st = active_route.route[station - 1]
+    st = active_route.stations[station - 1]
     self.active_route.del_station(st)
     puts "Вы успешно удалили станцию"
     active_route_enumeration
@@ -192,7 +239,7 @@ class Main
     @routes.each_index do |index|
       print "№ #{index + 1}. "
       rout = @routes[index]
-      rout_in = rout.route
+      rout_in = rout.stations
       rout_in.each do |i|
         print "#{i.name} "
       end
@@ -213,9 +260,10 @@ class Main
     print "Выбран маршрут: "
     active_route_enumeration
     puts
-    self.active_train.new_routes(active_route)
+    #self.active_train.new_routes(active_route)
+    self.active_train.assing_route(active_route)
     puts "Маршрут успешно добавлен"
-    a = active_train.routes[@index_station_train = 0]
+    a = active_train.route[@index_station_train = 0]
     a.add_train(active_train)
     action_menu
   end
@@ -233,20 +281,20 @@ class Main
       menu = gets.strip
       if menu == "1"
         self.active_train.to_forward_station(active_route)
-        if active_train.routes[@index_station_train + 1] == nil
+        if active_train.route[@index_station_train + 1] == nil
         else
-          a = active_train.routes[@index_station_train]
+          a = active_train.route[@index_station_train]
           a.send_train(active_train)
-          a = active_train.routes[@index_station_train += 1]
+          a = active_train.route[@index_station_train += 1]
           a.add_train(active_train)
         end
       elsif menu == "2"
         self.active_train.to_back_station(active_route)
-        if active_train.routes[@index_station_train - 1] == active_train.routes[-1]
+        if active_train.route[@index_station_train - 1] == active_train.route[-1]
         else
-          a = active_train.routes[@index_station_train]
+          a = active_train.route[@index_station_train]
           a.send_train(active_train)
-          a = active_train.routes[@index_station_train -= 1]
+          a = active_train.route[@index_station_train -= 1]
           a.add_train(active_train)
         end
       elsif menu == "0"
@@ -267,9 +315,16 @@ class Main
       puts "Введите 2, если хотите отцепить вагон"
       puts "Введите 0, если хотите выйти в главное меню"
       menu = gets.strip
-      adding_a_wagon if menu == "1"
-      wagon_uncoupling if menu == "2"
-      action_menu if menu == "0"
+
+      case menu
+      when "1"
+        adding_a_wagon
+      when "2"
+        wagon_uncoupling
+      when "0"
+        action_menu
+      end
+
     end
   end
 
@@ -299,9 +354,16 @@ class Main
     puts "Введите 2, если хотите просматривать список поездов на станции"
     puts "Введите 0, если хотите вернуться в главное меню"
     menu = gets.strip
-    station_list if menu == "1"
-    list_of_trains_at_the_station if menu == "2"
-    action_menu if menu == "0"
+
+    case menu
+    when "1"
+      station_listing
+    when "2"
+      list_of_trains_at_the_station
+    when "0"
+      action_menu
+    end
+
   end
 
 
@@ -359,7 +421,7 @@ class Main
   end
 
   def active_route_enumeration # маршрут активный для изменения
-    a = active_route.route
+    a = active_route.stations
     a.each do |index|
       print "#{index.name} "
     end
