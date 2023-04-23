@@ -1,3 +1,5 @@
+require_relative 'manufacturer.rb'
+require_relative 'instance_counter.rb'
 require_relative 'train.rb'
 require_relative 'train_pass.rb'
 require_relative 'train_cargo'
