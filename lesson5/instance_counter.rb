@@ -6,12 +6,17 @@ module InstanceCounter # метод подсчета и возвращения �
   end
 
   module ClassMethods
-    
-    $instances = 0
 
     def instances
-      $instances
+      @@instances
     end
+
+    def add_instances
+      @@instances += 1
+    end
+
+    @@instances ||= 0
+
   end
 
   module InstanceMethods
@@ -19,7 +24,7 @@ module InstanceCounter # метод подсчета и возвращения �
     private
 
     def register_instance
-      $instances += 1
-    end      
+      self.class.add_instances
+    end
   end
 end
