@@ -2,7 +2,7 @@ class Station # Станция
   include InstanceCounter
 
   attr_reader :trains, :name
-
+  
   def initialize(name)
     @name = name
     @trains = []

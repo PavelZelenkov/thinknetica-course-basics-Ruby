@@ -6,17 +6,11 @@ module InstanceCounter # метод подсчета и возвращения �
   end
 
   module ClassMethods
+    attr_writer :instances
 
     def instances
-      @@instances
+      @instances ||= 0
     end
-
-    def add_instances
-      @@instances += 1
-    end
-
-    @@instances ||= 0
-
   end
 
   module InstanceMethods
@@ -24,7 +18,7 @@ module InstanceCounter # метод подсчета и возвращения �
     private
 
     def register_instance
-      self.class.add_instances
+      self.class.instances += 1
     end
   end
 end
