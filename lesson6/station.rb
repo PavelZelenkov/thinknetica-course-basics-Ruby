@@ -13,6 +13,7 @@ class Station # Станция
   
   def valid?
     validate!
+    true
   rescue
     false
   end
@@ -40,7 +41,8 @@ class Station # Станция
   protected
 
   def validate!
-    raise "Название станции не должно быть пустым" if name == ''
-    true
+    errors = []
+    errors << "Название станции не должно быть пустым" if name == ''
+    raise errors.join('.') unless errors.empty?
   end
 end

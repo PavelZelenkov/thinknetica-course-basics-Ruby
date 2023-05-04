@@ -29,6 +29,7 @@ class Train # Поезд
 
   def valid?
     validate!
+    true
   rescue
     false
   end
@@ -91,9 +92,10 @@ class Train # Поезд
   protected
 
   def validate!
-    raise "Название станции не должно быть пустым" if number == ''
-    raise if number !~ NUMBER # проверка на формат номера поезда
-    true
+    errors = []
+    errors << "Название станции не должно быть пустым" if number == ''
+    errors << "Message" if number !~ NUMBER
+    raise errors.join('.') unless errors.empty?
   end
 
 end

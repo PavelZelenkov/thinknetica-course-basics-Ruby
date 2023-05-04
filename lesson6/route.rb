@@ -11,6 +11,7 @@ class Route # Маршрут
 
   def valid?
     validate!
+    true
   rescue
     false
   end
@@ -31,7 +32,8 @@ class Route # Маршрут
   protected
 
   def validate!
-    raise if stations[0] == '' || stations[1] == '' # начальные и конечные станции не должны быть пустыми
-    true
+    errors = []
+    errors << "Пустые названия станций" if stations[0] == '' || stations[1] == '' # начальные и конечные станции не должны быть пустыми
+    raise errors.join('.') unless errors.empty?
   end
 end
