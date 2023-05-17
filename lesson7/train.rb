@@ -41,11 +41,7 @@ class Train # Поезд
   def wagon_each
     wagon_block(@wagons) do |x|
       x.each do |i| 
-        if i.type == 'pass'
-          puts "Номер вагона № #{i.number} || Занятые места: #{i.occupied_place}, Свободные места: #{i.free_place}"
-        elsif i.type == 'cargo'
-          puts "Номер вагона № #{i.number} || Занятый объем: #{i.occupied_volume}, Доступный объем: #{i.free_volume}"
-        end
+        puts "Номер вагона № #{i.number} || Занято: #{i.used_place}, Свободно: #{i.free_place}"
       end
     end
   end

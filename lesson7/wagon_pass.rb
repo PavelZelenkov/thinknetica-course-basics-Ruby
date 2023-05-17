@@ -1,22 +1,10 @@
 class PassengerWagon < Wagon
-  attr_reader :occupied_place, :free_place, :places
-  
-  def initialize(places)
+  def initialize(number = 0, total_place)
     @type = 'pass'
-    @places = places
-    @occupied_place = 0
     super
   end
 
-  def take_the_place_of # занять место - по одному
-    @occupied_place += 1 if @occupied_place < @places
-  end
-
-  def occupied_place # выводит занятые места
-    @occupied_place
-  end
-
-  def free_place # свободные места
-    @free_place = @places - @occupied_place
+  def take_place # занять место - по одному
+    @used_place += 1 if @used_place < @total_place
   end
 end

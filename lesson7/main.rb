@@ -207,7 +207,7 @@ class Main
     when "4"
       action_with_the_wagon
     when "5"
-      take_a_seat_or_volume_in_a_carriage
+      take_place_wagons
     when "0"
       show_menu
     end
@@ -376,46 +376,33 @@ class Main
     puts "Поезд: #{active_train.number}. Количество вагонов: #{active_train.wagons.length}"
   end
 
-  def take_a_seat_or_volume_in_a_carriage # занять место или объем в вагоне
+  def take_place_wagons # занять места в вагоне
+    create_wagon if @wagons.length == 0
     puts "Выберите вагон с которым хотите совершить действие"
     wagon_enumeration
     selected_wagon = gets.strip.to_i
     self.active_wagon = @wagons[selected_wagon - 1]
-    if active_wagon.type == 'pass'
-      puts "Вы выбрали: Номер вагона #{active_wagon.number}. Тип вагона #{active_wagon.type}"
-      loop do
-        puts "Свободные места #{active_wagon.occupied_place}, Занятые места #{active_wagon.free_place}"
-        puts "Введите 1, если хотите занять одно место"
-        puts "Введите 0, если хотите выйти в меню выбора действий с объектами"
-        menu = gets.strip
+    puts "Вы выбрали: Номер вагона #{active_wagon.number}. Тип вагона #{active_wagon.type}"
+    loop do
+      puts "Занято: #{active_wagon.used_place}, Свободно: #{active_wagon.free_place}"
+      puts "Введите 1, если хотите занять объем или место"
+      puts "Введите 0, если хотите выйти в меню выбора действий с объектами"
+      menu = gets.strip
 
-        case menu
-        when "1"
-          active_wagon.take_the_place_of
-        when "0"
-          action_menu
-        end
-
-      end
-
-    elsif active_wagon.type == 'cargo'
-      loop do
-        puts "Занятый объем: #{active_wagon.occupied_volume}, Доступный объем: #{active_wagon.free_volume}"
-        puts "Введите 1, если хотите занять объем в вагоне"
-        puts "Введите 0, если хотите выйти в меню выбора действий с объектами"
-        menu = gets.strip
-
-        case menu
-        when "1"
+      case menu
+      when "1"
+        if active_wagon.type == 'cargo'
           puts "Введите объем"
           volume = gets.strip.to_i
-          active_wagon.take_up_volume(volume)
-        when "0"
-          action_menu
+          active_wagon.take_place(volume)
+        else
+          active_wagon.take_place
         end
-
+      when "0"
+        action_menu
       end
     end
+
   end
 
   def info_menu
