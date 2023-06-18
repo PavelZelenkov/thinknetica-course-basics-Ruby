@@ -104,7 +104,7 @@ class Main
       puts 'Введите название пассажирского поезда (пример ввода: "aaa-aa"):'
       name = gets.strip
       train = PassengerTrain.new(name)
-    rescue RuntimeError => e
+    rescue ArgumentError => e
       attempt += 1
       puts "#{e.inspect} Ошибка!!! Попробуйте ещё раз"
       retry if attempt < 3

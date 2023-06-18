@@ -7,9 +7,6 @@ class Train
   attr_accessor :wagons, :speed
   attr_reader :number, :type, :route
 
-  validate :number, :presence
-  validate :number, :format, /^\w{3}(.\w{2})?$/.freeze
-
   class << self
     def all_train
       @@all_train ||= []
